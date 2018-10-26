@@ -10,7 +10,7 @@ npm install @givengine/oak-tree
 ```
 
 # Usage
-You may import the entire namespace of `GiveTree`, which includes `GiveTree`, `GiveTreeNode`, `GiveNonLeafNode`, `DataNode` and `WitheringMixin`:
+You may import the entire namespace of `OakTree`, which includes `OakTree`, and `OakNode`:
 ```javascript
 // Import namespace
 const OakTreeNS = require('@givengine/oak-tree')
