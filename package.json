@@ -1,0 +1,39 @@
+{
+  "name": "oak-tree",
+  "version": "0.3.0",
+  "description": "Oak tree, a GIVE Tree implementation with variable interval, no summary, auto-balanced (B+ tree) properties.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zhong-Lab-UCSD/oak-tree.git"
+  },
+  "keywords": [
+    "cache",
+    "b+tree"
+  ],
+  "author": "Xiaoyi Cao",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/Zhong-Lab-UCSD/oak-tree/issues"
+  },
+  "homepage": "https://github.com/Zhong-Lab-UCSD/oak-tree#readme",
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "chai": "^4.2.0",
+    "grunt": "^1.0.3",
+    "grunt-babel": "^8.0.0",
+    "mocha": "^5.2.0",
+    "standard": "^12.0.1"
+  },
+  "optionalDependencies": {
+    "@givengine/chrom-region": "^0.3.0"
+  },
+  "dependencies": {
+    "@givengine/give-tree": "^0.3.0",
+    "@log4js-node/log4js-api": "^1.0.2"
+  }
+}
