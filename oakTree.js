@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2017 GIVe Authors
+ * Copyright 2017-2018 Xiaoyi Cao
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,6 @@ const logger = log4js.getLogger('my-library')
 /**
  * Oak tree for data storage, derived from B+ tree.
  * See `GIVE.GiveTree` for other properties and methods.
- * @typedef {object} OakTree
  * @property {number} branchingFactor - branching factor for the tree. The
  *    number of children for all non-root nodes will be equal to or greater
  *    than `this.branchingFactor / 2`. The number of children for all nodes
@@ -38,7 +37,7 @@ const logger = log4js.getLogger('my-library')
  *
  * @class
  *
- * @implements GiveTree
+ * @implements {GiveTree}
  */
 class OakTree extends GiveTreeNS.GiveTree {
   /**

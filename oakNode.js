@@ -29,13 +29,12 @@ const logger = log4js.getLogger('my-library')
  * See `GiveNonLeafNode` for common non-leaf node documentation. Branching
  * factor for the B+ tree is provided by `this.tree.branchingFactor`.
  *
- * @typedef {object} OakNode
  * @property {number} tree.branchingFactor - The branching factor for the B+
  *    tree.
  *    It indicates how many children at most can a node have, and how many
  *    children at least should a node have (`branchingFactor / 2`)
  *
- * @class OakNode
+ * @class
  */
 class OakNode extends GiveTreeNS.GiveNonLeafNode {
   /**
