@@ -1,6 +1,6 @@
 {
-  "name": "oak-tree",
-  "version": "0.3.2",
+  "name": "@givengine/oak-tree",
+  "version": "0.3.0",
   "description": "Oak tree, a GIVE Tree implementation with variable interval, no summary, auto-balanced (B+ tree) properties.",
   "main": "index.js",
   "scripts": {
