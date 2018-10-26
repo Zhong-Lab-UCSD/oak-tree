@@ -19,7 +19,7 @@ const GiveTreeNS = require('@givengine/give-tree')
 const OakNode = require('./oakNode')
 
 const log4js = require('@log4js-node/log4js-api')
-const logger = log4js.getLogger('my-library')
+const logger = log4js.getLogger('givengine')
 
 /**
  * Oak tree for data storage, derived from B+ tree.

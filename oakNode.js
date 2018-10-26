@@ -18,7 +18,7 @@
 const GiveTreeNS = require('@givengine/give-tree')
 
 const log4js = require('@log4js-node/log4js-api')
-const logger = log4js.getLogger('my-library')
+const logger = log4js.getLogger('givengine')
 
 /**
  * Non-leaf nodes for Oak Trees
