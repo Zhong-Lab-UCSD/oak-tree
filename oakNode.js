@@ -43,9 +43,10 @@ class OakNode extends GiveTreeNS.GiveNonLeafNode {
    * `end` is being extended) may be extended if they are the same as the
    * space filling.
    *
-   * @param {*} convertTo - Used to fill the extended space
-   * @param {*} start - New `start` value
-   * @param {*} end - New `end` value
+   * @param {boolean|null} [convertTo=null] The value to convert the empty space
+   *    into. Should be `null` (default) or `false`.
+   * @param {number} [start] - New `start` value
+   * @param {number} [end] - New `end` value
    * @returns
    * @memberof OakNode
    */
@@ -94,7 +95,7 @@ class OakNode extends GiveTreeNS.GiveNonLeafNode {
    * B+ tree requirements.
    *
    * @param {OakNode} node The node being merged
-   * @returns {Boolean} Whether `this` is mergeable with `node` (and has
+   * @returns {boolean} Whether `this` is mergeable with `node` (and has
    *    already been merged) or not.
    * @memberof OakNode
    */
@@ -377,7 +378,7 @@ class OakNode extends GiveTreeNS.GiveNonLeafNode {
     let currIndex = 0
     props.dataIndex = 0
     let prevDataIndex
-    props.contList = props.contList || []
+    props.continuedList = props.continuedList || []
     if (!(GiveTreeNS.GiveTreeNode.prototype.isPrototypeOf(
       props.LeafNodeCtor.prototype
     ))) {
@@ -417,7 +418,7 @@ class OakNode extends GiveTreeNS.GiveNonLeafNode {
       }
 
       if (
-        props.contList.length > 0 ||
+        props.continuedList.length > 0 ||
         (props.dataIndex < data.length &&
           data[props.dataIndex].start <= this.keys[currIndex])
       ) {
@@ -448,8 +449,8 @@ class OakNode extends GiveTreeNS.GiveNonLeafNode {
 
     this._mergeChild(currIndex, true, true)
 
-    // Process `props.contList` for one last time
-    props.contList = props.contList.concat(
+    // Process `props.continuedList` for one last time
+    props.continuedList = props.continuedList.concat(
       data.slice(prevDataIndex, props.dataIndex)
     ).filter(entry => entry.end > chrRange.end)
 
