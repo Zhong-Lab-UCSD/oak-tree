@@ -13,6 +13,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * @module OakNode
  */
 
 const GiveTreeNS = require('@givengine/give-tree')
@@ -35,6 +37,7 @@ const logger = log4js.getLogger('givengine')
  *    children at least should a node have (`branchingFactor / 2`)
  *
  * @class
+ * @alias module:OakNode
  */
 class OakNode extends GiveTreeNS.GiveNonLeafNode {
   /**
@@ -47,8 +50,7 @@ class OakNode extends GiveTreeNS.GiveNonLeafNode {
    *    into. Should be `null` (default) or `false`.
    * @param {number} [start] - New `start` value
    * @param {number} [end] - New `end` value
-   * @returns
-   * @memberof OakNode
+   * @returns {OakNode} `this`
    */
   _extendBoundary (convertTo, start, end) {
     let extendHappened = false
@@ -97,7 +99,6 @@ class OakNode extends GiveTreeNS.GiveNonLeafNode {
    * @param {OakNode} node The node being merged
    * @returns {boolean} Whether `this` is mergeable with `node` (and has
    *    already been merged) or not.
-   * @memberof OakNode
    */
   mergeAfter (node) {
     if (node instanceof this.constructor && this.end === node.start) {
@@ -119,7 +120,7 @@ class OakNode extends GiveTreeNS.GiveNonLeafNode {
   }
 
   /**
-   * _splitChild - Split a child according to its type.
+   * Split a child according to its type.
    *    If it is an `OakNode`, split it to satisfy B+ tree requirements.
    *    If it is a `DataNode`, split as `GiveNonLeafNode._splitChild`
    *    does.
@@ -134,7 +135,6 @@ class OakNode extends GiveTreeNS.GiveNonLeafNode {
    *    former child. If `undefined`, use the old child.
    *    Only used when the child is a `DataNode`.
    * @returns {number} Number of split children
-   * @memberof OakNode
    */
   _splitChild (index, newKey, newLatterChild, newFormerChild) {
     if (this.reverseDepth <= 0) {
@@ -241,7 +241,7 @@ class OakNode extends GiveTreeNS.GiveNonLeafNode {
       }
       return newRoot
     }
-    return this.isEmpty ? false : this
+    return (!this.isEmpty) && this
   }
 
   /**
@@ -460,15 +460,13 @@ class OakNode extends GiveTreeNS.GiveNonLeafNode {
   }
 
   /**
-   * remove - Remove data entries from the node.
+   * Remove data entries from the node.
    *    Data entries with the same start (and end values if exists) will be
    *    removed. If multiple entries are found with the same start (and end
    *    values), the behavior will be defined by `exactMatch`.
    *    __NOTE:__ The tree will not be restructured due to the fact that
    *    multiple remove calls may happen within one action and restructuring
    *    every time incurs unnecessary computational burden.
-   *
-   * @memberof GiveTreeNode.prototype
    *
    * @param  {ChromRegion|GiveTreeNode} data - the data entry being
    *    removed.
@@ -481,21 +479,20 @@ class OakNode extends GiveTreeNS.GiveNonLeafNode {
    *    removed.
    * @param {boolean|null} convertTo - what shall be used to replace
    *    the removed nodes, should be either `null` (default) or `false`.
-   * @param  {object|null} [props] - additional properties being
+   * @param  {Object|null} [props] - additional properties being
    *    passed onto nodes.
    * @param {function|null} props.callback - the callback function to be
    *    used (with the data entry as its sole parameter) when deleting
    * @returns {GiveTreeNode|boolean}
    *    If the node itself shall be removed, return a falsey value to allow
-   *    parents to take additional steps. If the node is root, return the
-   *    new root if decreasing of tree height happened.
+   *    parents to take additional steps.
    */
   remove (data, exactMatch, convertTo, props) {
     props = props || {}
     convertTo = (convertTo === false ? false : null)
     // Check whether `this` shall be removed
     if (this.start === data.start && this.end === data.end) {
-      if (!exactMatch || this._compareData(data, this)) {
+      if (!exactMatch || this.constructor._compareData(data, this)) {
         // remove content of this
         if (typeof props.callback === 'function') {
           props.callback(this)

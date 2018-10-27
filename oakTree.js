@@ -13,6 +13,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * @module OakTree
  */
 
 const GiveTreeNS = require('@givengine/give-tree')
@@ -36,24 +38,21 @@ const logger = log4js.getLogger('givengine')
  *    `GIVE.DataNode` by default
  *
  * @class
+ * @alias module:OakTree
  *
  * @implements {GiveTree}
+ *
+ * @param {ChromRegion} chrRange - The range this data storage unit
+ *    will be responsible for.
+ * @param {Object} [props] - properties that will be passed to the individual
+ *    implementations
+ * @param {number} [props.branchingFactor] - for `this.branchingFactor`
+ * @param {function} [props.NonLeafNodeCtor] - used to override non-leaf node
+ *    constructors.
+ * @param {function} [props.LeafNodeCtor] - if omitted, the constructor of
+ *    `GiveTreeNS.DataNode` will be used
  */
 class OakTree extends GiveTreeNS.GiveTree {
-  /**
-   * Creates an instance of OakTree.
-   * @constructor
-   * @param {ChromRegion} chrRange - The range this data storage unit
-   *    will be responsible for.
-   * @param {object} [props] - properties that will be passed to the individual
-   *    implementations
-   * @param {number} [props.branchingFactor] - for `this.branchingFactor`
-   * @param {function} [props.NonLeafNodeCtor] - used to override non-leaf node
-   *    constructors.
-   * @param {function} [props.LeafNodeCtor] - if omitted, the constructor of
-   *    `GiveTreeNS.DataNode` will be used
-   * @memberof OakTree
-   */
   constructor (chrRange, props) {
     // start and length is for the corresponding region
     // note that `OakTree` should be populated with `OakNode`s
